@@ -1,4 +1,7 @@
 # Bank Kata following a double loop TDD Outside-In approach
+
+[![BCH compliance](https://bettercodehub.com/edge/badge/Tr00d/BankKata?branch=main)](https://bettercodehub.com/)
+
 The initial kata can be found here: https://github.com/sandromancuso/bank-kata-outsidein-screencast
 
 The objective was to expose how the TDD outside-in approach can lead to a good design starting from an acceptance test. 
