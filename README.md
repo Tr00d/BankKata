@@ -1,5 +1,5 @@
 # Bank Kata following a double loop TDD Outside-In approach
-
+Here's the rating on BetterCodeHub. The rating is 9/10 because everything is one assembly but being a kata, I did not created layers.
 [![BCH compliance](https://bettercodehub.com/edge/badge/Tr00d/BankKata?branch=main)](https://bettercodehub.com/)
 
 The initial kata can be found here: https://github.com/sandromancuso/bank-kata-outsidein-screencast
