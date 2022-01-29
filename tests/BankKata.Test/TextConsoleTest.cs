@@ -1,22 +1,20 @@
-﻿using AutoFixture;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Text;
+using AutoFixture;
+using NUnit.Framework;
 
 namespace BankKata.Test
 {
     [TestFixture(Category = "Unit")]
     public class TextConsoleTest
     {
-        private Fixture _fixture;
-
         [SetUp]
         public void SetUp()
         {
             this._fixture = new Fixture();
         }
+
+        private Fixture _fixture;
 
         [Test]
         public void WriteLine_ShouldWriteTextToConsole()
@@ -26,7 +24,7 @@ namespace BankKata.Test
             Console.SetOut(stringWriter);
             TextConsole console = new TextConsole();
             console.WriteLine(text);
-            Assert.AreEqual($"{text}\r\n", stringWriter.ToString());
+            Assert.AreEqual($"{text}\n", stringWriter.ToString());
         }
     }
 }

@@ -19,7 +19,8 @@ namespace BankKata.Test.Acceptance.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Account", Description="Feature for managing a bank account.", SourceFile="Features\\Account.feature", SourceLine=0)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("Account")]
     public partial class AccountFeature
     {
         
@@ -30,7 +31,7 @@ namespace BankKata.Test.Acceptance.Features
 #line 1 "Account.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -38,18 +39,19 @@ namespace BankKata.Test.Acceptance.Features
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.OneTimeTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -58,6 +60,7 @@ namespace BankKata.Test.Acceptance.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -70,8 +73,9 @@ namespace BankKata.Test.Acceptance.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Prints all statements with balance from newest to oldest", new string[] {
-                "Acceptance"}, SourceLine=4)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Prints all statements with balance from newest to oldest")]
+        [NUnit.Framework.CategoryAttribute("Acceptance")]
         public virtual void PrintsAllStatementsWithBalanceFromNewestToOldest()
         {
             string[] tagsOfScenario = new string[] {
@@ -79,7 +83,7 @@ namespace BankKata.Test.Acceptance.Features
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Prints all statements with balance from newest to oldest", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
-this.ScenarioInitialize(scenarioInfo);
+    this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -99,19 +103,35 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
- testRunner.Given("I make a deposit of 1000 on \'10/01/2021\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("I make a deposit of 1000 on \'10/01/2021\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.And("I make a deposit of 2000 on \'15/01/2021\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("I make a deposit of 2000 on \'15/01/2021\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 8
- testRunner.And("I make a withdrawal of 500 on \'20/01/2021\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("I make a withdrawal of 500 on \'20/01/2021\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 9
- testRunner.When("I prints the account statements", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+        testRunner.When("I prints the account statements", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Date",
+                            "Amount",
+                            "Balance"});
+                table1.AddRow(new string[] {
+                            "20/01/2021",
+                            "-500",
+                            "2500"});
+                table1.AddRow(new string[] {
+                            "15/01/2021",
+                            "2000",
+                            "3000"});
+                table1.AddRow(new string[] {
+                            "10/01/2021",
+                            "1000",
+                            "1000"});
 #line 10
- testRunner.Then("I should see all statements in reverse chronological order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("I should see these statements:", ((string)(null)), table1, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
