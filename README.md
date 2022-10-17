@@ -1,4 +1,6 @@
 # Bank Kata following a double loop TDD Outside-In approach
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Tr00d_BankKata&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Tr00d_BankKata)
+
 Here's the rating on BetterCodeHub. The rating is 9/10 because everything is one assembly but being a kata, I did not created layers.
 [![BCH compliance](https://bettercodehub.com/edge/badge/Tr00d/BankKata?branch=main)](https://bettercodehub.com/)
 
