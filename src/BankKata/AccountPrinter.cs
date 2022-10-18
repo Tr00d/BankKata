@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BankKata
 {
     public class AccountPrinter : IAccountPrinter
     {
-        public const string dateFormat = "dd/MM/yyyy";
-        public const string statementHeader = "DATE | AMOUNT | BALANCE";
-        public static readonly Func<Transaction, int, string> formatter = (Transaction transaction, int balance) => $"{transaction.Date.ToString(AccountPrinter.dateFormat)} | {transaction.Amount} | {balance}";
-        private ITextConsole _console;
+        public const string DateFormat = "dd/MM/yyyy";
+        public const string StatementHeader = "DATE | AMOUNT | BALANCE";
+
+        public static readonly Func<Transaction, int, string> Formatter = (Transaction transaction, int balance) =>
+            $"{transaction.Date.ToString(DateFormat)} | {transaction.Amount} | {balance}";
+
+        private readonly ITextConsole _console;
 
         public AccountPrinter(ITextConsole console)
         {
@@ -19,16 +21,40 @@ namespace BankKata
 
         public void PrintTransactions(IEnumerable<Transaction> transactions)
         {
-            this._console.WriteLine(statementHeader);
-            int runningBalance = 0;
-            foreach (var statement in transactions
-                .OrderBy(transaction => transaction.Date)
-                .Select(transaction => new { Transaction = transaction, Balance = runningBalance += transaction.Amount })
-                .ToList()
-                .OrderByDescending(statement => statement.Transaction.Date))
+            this._console.WriteLine(StatementHeader);
+            foreach (var statement in this.ParseTransactions(transactions))
             {
-                this._console.WriteLine(formatter(statement.Transaction, statement.Balance));
+                this._console.WriteLine(Formatter(statement.Transaction, statement.Balance));
             }
+        }
+
+        private IEnumerable<AggregateTransaction> ParseTransactions(IEnumerable<Transaction> transactions)
+        {
+            var formattedTransactions = new List<AggregateTransaction>();
+            _ = transactions
+                .OrderBy(transaction => transaction.Date)
+                .Select(transaction => new AggregateTransaction(transaction))
+                .Aggregate(default(int), (runningBalance, transaction) =>
+                {
+                    runningBalance += transaction.Transaction.Amount;
+                    formattedTransactions.Add(new AggregateTransaction(transaction.Transaction, runningBalance));
+                    return runningBalance;
+                });
+            return formattedTransactions
+                .OrderByDescending(statement => statement.Transaction.Date);
+        }
+
+        private struct AggregateTransaction
+        {
+            public AggregateTransaction(Transaction transaction, int balance = default)
+            {
+                this.Transaction = transaction;
+                this.Balance = balance;
+            }
+
+            public Transaction Transaction { get; }
+
+            public int Balance { get; }
         }
     }
 }

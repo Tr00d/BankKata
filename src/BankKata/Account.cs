@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace BankKata
+﻿namespace BankKata
 {
     public class Account : IAccount
     {
-        private IAccountPrinter _printer;
-        private ITransactionRepository _transactionRepository;
+        private readonly IAccountPrinter _printer;
+        private readonly ITransactionRepository _transactionRepository;
 
         public Account(ITransactionRepository transactionRepository, IAccountPrinter printer)
         {
