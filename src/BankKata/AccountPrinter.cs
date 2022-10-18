@@ -22,10 +22,14 @@ namespace BankKata
         public void PrintTransactions(IEnumerable<Transaction> transactions)
         {
             this._console.WriteLine(StatementHeader);
-            foreach (var statement in this.ParseTransactions(transactions))
-            {
-                this._console.WriteLine(Formatter(statement.Transaction, statement.Balance));
-            }
+            this.ParseTransactions(transactions)
+                .ToList()
+                .ForEach(this.WriteStatementToConsole);
+        }
+
+        private void WriteStatementToConsole(AggregateTransaction statement)
+        {
+            this._console.WriteLine(Formatter(statement.Transaction, statement.Balance));
         }
 
         private IEnumerable<AggregateTransaction> ParseTransactions(IEnumerable<Transaction> transactions)
