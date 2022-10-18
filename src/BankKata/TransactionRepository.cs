@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace BankKata
 {
@@ -32,7 +30,7 @@ namespace BankKata
             this._transactions.Add(new Transaction
             {
                 Amount = amount,
-                Date = this._timeProvider.UtcNow
+                Date = this._timeProvider.UtcNow,
             });
         }
     }

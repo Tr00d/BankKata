@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -25,14 +24,14 @@ namespace BankKata.Test.Acceptance.Steps
         public void GivenIMakeADepositOfOn(int amount, string date)
         {
             this.driver.Deposit(amount,
-                DateTime.ParseExact(date, AccountPrinter.dateFormat, CultureInfo.InvariantCulture));
+                DateTime.ParseExact(date, AccountPrinter.DateFormat, CultureInfo.InvariantCulture));
         }
 
         [Given(@"I make a withdrawal of (.*) on '(.*)'")]
         public void GivenIMakeAWithdrawalOfOn(int amount, string date)
         {
             this.driver.Withdraw(amount,
-                DateTime.ParseExact(date, AccountPrinter.dateFormat, CultureInfo.InvariantCulture));
+                DateTime.ParseExact(date, AccountPrinter.DateFormat, CultureInfo.InvariantCulture));
         }
 
         [When(@"I prints the account statements")]
@@ -44,8 +43,8 @@ namespace BankKata.Test.Acceptance.Steps
         [Then(@"I should see these statements:")]
         public void ThenIShouldSeeTheseStatements(Table table)
         {
-            IEnumerable<TestStatement> statements = table.CreateSet<TestStatement>();
-            StringBuilder builder = new StringBuilder();
+            var statements = table.CreateSet<TestStatement>();
+            var builder = new StringBuilder();
             builder.AppendLine("DATE | AMOUNT | BALANCE");
             statements.ToList().ForEach(statement =>
                 builder.AppendLine($"{statement.Date} | {statement.Amount} | {statement.Balance}"));

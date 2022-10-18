@@ -19,12 +19,12 @@ namespace BankKata.Test
         [Test]
         public void WriteLine_ShouldWriteTextToConsole()
         {
-            string text = this._fixture.Create<string>();
-            StringWriter stringWriter = new StringWriter();
+            var text = this._fixture.Create<string>();
+            var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
-            TextConsole console = new TextConsole();
+            var console = new TextConsole();
             console.WriteLine(text);
-            Assert.AreEqual($"{text}\n", stringWriter.ToString());
+            Assert.AreEqual($"{text}\r\n", stringWriter.ToString());
         }
     }
 }
